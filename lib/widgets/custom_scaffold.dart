@@ -6,7 +6,7 @@ class CustomScaffold extends StatefulWidget {
   final Widget? body;
   final FloatingActionButton? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
-  final BottomAppBar? bottomNavigationBar;
+  final Widget? bottomNavigationBar;
   final Color? foregroundColor;
   final double? topMarginBody;
 

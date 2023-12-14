@@ -46,20 +46,26 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8.0,
-        child: BottomNavigation(menuIcons: [
-          MenuIcon(
-            icon: Icons.home,
-            title: "Home",
-            activeIconColor: Theme.of(context).primaryColor,
-          ),
-          const MenuIcon(
-            icon: Icons.dataset,
-            title: "Data",
-          ),
-        ], controller: bottomNavigationController),
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+        child: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 8.0,
+          child: BottomNavigation(menuIcons: [
+            MenuIcon(
+              icon: Icons.home,
+              title: "Home",
+              activeIconColor: Theme.of(context).primaryColor,
+            ),
+            const MenuIcon(
+              icon: Icons.dataset,
+              title: "Data",
+            ),
+          ], controller: bottomNavigationController),
+        ),
       ),
     );
   }
