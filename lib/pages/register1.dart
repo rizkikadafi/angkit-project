@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:angkit_project/pages/register2.dart';
 import 'package:angkit_project/components/custom_stepper.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -12,43 +14,37 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final usernameController = TextEditingController();
+
   FocusNode focusNode = FocusNode();
   FocusNode ufocusNode = FocusNode();
+
+  void Register() async {
+    // print(usernameController.text);
+
+    Uri uri = Uri.parse("http://angkit.ktsabit.com/checkUser");
+
+    Map data = {"username": usernameController.text};
+
+    var result = await http.post(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data));
+
+    print(result.body);
+
+    Map apa = {"data": "Username available", "status": "ok"};
+
+    print(["status"]);
+
+    if (apa["status"] == "ok") {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterStep2(password: passwordController.text, username: usernameController.text,)));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: true,
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   elevation: 1000,
-      //   shadowColor: Colors.black,
-      //   title: const Text(
-      //     "Daftar",
-      //     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-      //   ),
-      // ),
-      // appBar: AppBar(
-      //   title: const Text(
-      //     "Daftar",
-      //     style: TextStyle(
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   flexibleSpace: Container(
-      //     decoration: const BoxDecoration(
-      //       boxShadow: [
-      //         BoxShadow(
-      //           color: Color(0xffAFAFAF),
-      //           blurRadius: 8.0,
-      //         ),
-      //       ],
-      //     ),
-      //     child: Container(
-      //       color: Colors.white,
-      //     ),
-      //   ),
-      // ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
@@ -147,40 +143,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: double.infinity,
                     height: 50,
                     child: FilledButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const RegisterStep2()));
-                      },
+                      onPressed: Register,
                       child: const Text('Lanjut'),
                     ),
                   ),
                 ],
               ),
-              // Column(
-              //   mainAxisAlignment: MainAxisAlignment.end,
-              //   children: [
-              //     RichText(
-              //       text: TextSpan(
-              //         text: 'Sudah punya akun? ',
-              //         style: TextStyle(fontSize: 15, color: Colors.black),
-              //         children: [
-              //           TextSpan(
-              //             recognizer: TapGestureRecognizer()
-              //               ..onTap = () {
-              //                 Navigator.of(context).push(MaterialPageRoute(
-              //                     builder: (context) => const LoginPage()));
-              //               },
-              //             style:
-              //                 TextStyle(fontSize: 15, color: Color(0xff3C834B)),
-              //             text: 'Masuk',
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     const SizedBox(height: 20),
-              //   ],
-              // ),
-              // const SizedBox(height: 20),
             ],
           ),
         ),

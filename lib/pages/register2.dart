@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:angkit_project/pages/register3.dart';
+import 'package:angkit_project/pages/register1.dart';
 import 'package:angkit_project/components/custom_stepper.dart';
 
 class RegisterStep2 extends StatefulWidget {
-  const RegisterStep2({super.key});
+  RegisterStep2({super.key, required this.password, required this.username});
+
+  final password;
+  final username;
 
   @override
   State<RegisterStep2> createState() => _RegisterStep2State();
@@ -12,8 +16,6 @@ class RegisterStep2 extends StatefulWidget {
 enum Role { peternak, distributor }
 
 class _RegisterStep2State extends State<RegisterStep2> {
-  final passwordController = TextEditingController();
-  final usernameController = TextEditingController();
   FocusNode focusNode = FocusNode();
   FocusNode ufocusNode = FocusNode();
   Role? role;
@@ -21,37 +23,6 @@ class _RegisterStep2State extends State<RegisterStep2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: true,
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   elevation: 1000,
-      //   shadowColor: Colors.black,
-      //   title: const Text(
-      //     "Daftar",
-      //     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-      //   ),
-      // ),
-      // appBar: AppBar(
-      //   title: const Text(
-      //     "Daftar",
-      //     style: TextStyle(
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   flexibleSpace: Container(
-      //     decoration: const BoxDecoration(
-      //       boxShadow: [
-      //         BoxShadow(
-      //           color: Color(0xffAFAFAF),
-      //           blurRadius: 8.0,
-      //         ),
-      //       ],
-      //     ),
-      //     child: Container(
-      //       color: Colors.white,
-      //     ),
-      //   ),
-      // ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
