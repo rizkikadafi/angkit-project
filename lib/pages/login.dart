@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:angkit_project/pages/register1.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,7 +17,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       // resizeToAvoidBottomInset: true,
       // appBar: AppBar(
@@ -29,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
             // mainAxisAlignment: MainAxisAlignment.start,
             children: [
               AspectRatio(
-                aspectRatio: 10/8,
+                aspectRatio: 10 / 8,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -48,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                       "Seller Center",
                       style: TextStyle(fontSize: 16, color: Color(0xff3C834B)),
                     ),
-                  const SizedBox(height: 40),
+                    const SizedBox(height: 40),
                   ],
                 ),
               ),
@@ -86,8 +87,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       labelText: 'Username',
-                      labelStyle: TextStyle(color:focusNode.hasFocus? Color(0xff3C834B)
-                      :Colors.black54),
+                      labelStyle: TextStyle(
+                          color: focusNode.hasFocus
+                              ? Color(0xff3C834B)
+                              : Colors.black54),
                     ),
                     controller: usernameController,
                     onTap: () {
@@ -98,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     focusNode: focusNode,
                   ),
                   const SizedBox(height: 20),
-                 TextFormField(
+                  TextFormField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your password';
@@ -120,8 +123,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       labelText: 'Sandi',
-                      labelStyle: TextStyle(color:ufocusNode.hasFocus? Color(0xff3C834B)
-                      :Colors.black54),
+                      labelStyle: TextStyle(
+                          color: ufocusNode.hasFocus
+                              ? Color(0xff3C834B)
+                              : Colors.black54),
                     ),
                     controller: passwordController,
                     onTap: () {
@@ -147,13 +152,18 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: 'Belum punya akun? ',
                       style: TextStyle(fontSize: 15, color: Colors.black),
                       children: [
                         TextSpan(
-                          // recognizer: TapGestureRecognizer()..onTap = () {}
-                          style: TextStyle(fontSize: 15, color: Color(0xff3C834B)),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const RegisterPage()));
+                            },
+                          style:
+                              TextStyle(fontSize: 15, color: Color(0xff3C834B)),
                           text: 'Daftar',
                         ),
                       ],
