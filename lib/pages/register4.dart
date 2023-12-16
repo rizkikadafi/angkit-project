@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:angkit_project/pages/login.dart';
 import 'package:angkit_project/components/custom_stepper.dart';
@@ -56,46 +55,51 @@ class _RegisterFinishState extends State<RegisterFinish> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
+              const Column(
+                children: [
+                  SizedBox(height: 70),
+                  CustomStepper(step: 4),
+                ],
+              ),
+              const Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 70),
-                  CustomStepper(step: 4),
-                  const SizedBox(height: 35),
+                  SizedBox(height: 35),
                   Icon(
                     Icons.check_circle,
                     color: Colors.green,
                     size: 180.0,
                   ),
-                  const SizedBox(height: 20),
-                  const Text(
+                  SizedBox(height: 20),
+                  Text(
                     "Selamat!",
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),
-                  const Text(
+                  Text(
                     "Anda sudah berhasil terdaftar di aplikasi Angkit Agro.",
-                    style: TextStyle(fontSize: 12, color: Colors.black),
+                    style: TextStyle(
+                        fontSize: 12, color: Color.fromARGB(255, 60, 60, 60)),
                   ),
-                  const Text(
+                  Text(
                     "Silakan Tekan Selesai untuk masuk ke akun anda.",
                     style: TextStyle(fontSize: 12, color: Colors.black),
                   ),
-                  const SizedBox(height: 130),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: FilledButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const LoginPage()));
-                      },
-                      child: const Text('Selesai'),
-                    ),
-                  ),
+                  SizedBox(height: 130),
                 ],
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: FilledButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const LoginPage()));
+                  },
+                  child: const Text('Selesai'),
+                ),
               ),
               // Column(
               //   mainAxisAlignment: MainAxisAlignment.end,

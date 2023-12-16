@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       return null;
                     },
-                    obscureText: true,
+                    // obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0xffF6F6F6),

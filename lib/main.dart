@@ -19,9 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
-            backgroundColor: Color(0xff66B357),
-            textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
-          ),
+              backgroundColor: Color(0xff66B357),
+              textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         ),
         scaffoldBackgroundColor: Colors.white,
         // colorScheme: ColorScheme.fromSeed(
@@ -29,6 +28,14 @@ class MyApp extends StatelessWidget {
         //   brightness: Brightness.values[1],
         // ),
         useMaterial3: true,
+        radioTheme: RadioThemeData(
+          fillColor: MaterialStateProperty.resolveWith((Set states) {
+            if (states.contains(MaterialState.selected)) {
+              return Colors.green;
+            }
+            return Colors.grey;
+          }),
+        ),
       ),
       home: const LoginPage(),
     );

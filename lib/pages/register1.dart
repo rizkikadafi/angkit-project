@@ -1,6 +1,4 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:angkit_project/pages/login.dart';
 import 'package:angkit_project/pages/register2.dart';
 import 'package:angkit_project/components/custom_stepper.dart';
 
@@ -64,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: [
                   const SizedBox(height: 70),
                   CustomStepper(step: 1),
-                  const SizedBox(height: 35),
+                  const SizedBox(height: 50),
                   const Text(
                     "Daftar",
                     style: TextStyle(
@@ -80,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       }
                       return null;
                     },
-                    obscureText: true,
+                    // obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0xffF6F6F6),

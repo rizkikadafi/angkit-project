@@ -1,6 +1,4 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:angkit_project/pages/login.dart';
 import 'package:angkit_project/pages/register4.dart';
 import 'package:angkit_project/components/custom_stepper.dart';
 
@@ -64,7 +62,7 @@ class _RegisterStep3State extends State<RegisterStep3> {
                 children: [
                   const SizedBox(height: 70),
                   CustomStepper(step: 3),
-                  const SizedBox(height: 35),
+                  const SizedBox(height: 50),
                   const Text(
                     "Informasi Peternakan",
                     style: TextStyle(

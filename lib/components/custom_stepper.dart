@@ -28,9 +28,11 @@ class CustomStepper extends StatelessWidget {
             ),
             Container(
               width: 48.0,
-              height: 2.5,
-              decoration: const BoxDecoration(
-                color: Color(0xff66B357),
+              height: 2.0,
+              decoration: BoxDecoration(
+                color: (step > 1)
+                    ? const Color(0xff66B357)
+                    : const Color(0xffAFAFAF),
               ),
             ),
             Container(
@@ -48,9 +50,9 @@ class CustomStepper extends StatelessWidget {
             ),
             Container(
               width: 48.0,
-              height: 2.5,
+              height: 2.0,
               decoration: BoxDecoration(
-                color: (step > 1)
+                color: (step > 2)
                     ? const Color(0xff66B357)
                     : const Color(0xffAFAFAF),
               ),
@@ -72,7 +74,7 @@ class CustomStepper extends StatelessWidget {
               width: 48.0,
               height: 2.0,
               decoration: BoxDecoration(
-                color: (step > 2)
+                color: (step > 3)
                     ? const Color(0xff66B357)
                     : const Color(0xffAFAFAF),
               ),
