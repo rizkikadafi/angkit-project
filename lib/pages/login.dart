@@ -152,6 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(fontSize: 15, color: Colors.black),
                       children: [
                         TextSpan(
+                          // recognizer: TapGestureRecognizer()..onTap = () {}
                           style: TextStyle(fontSize: 15, color: Color(0xff3C834B)),
                           text: 'Daftar',
                         ),
