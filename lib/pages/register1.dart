@@ -22,7 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     Uri uri = Uri.parse("http://angkit.ktsabit.com/checkUser");
 
-    Map data = {"username": usernameController.text};
+    Map data = {"username": usernameController.text,};
 
     var result = await http.post(uri,
         headers: <String, String>{

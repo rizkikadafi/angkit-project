@@ -100,7 +100,7 @@ class _RegisterStep3State extends State<RegisterStep3> {
                       }
                       return null;
                     },
-                    obscureText: true,
+                    // obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0xffF6F6F6),
@@ -136,7 +136,7 @@ class _RegisterStep3State extends State<RegisterStep3> {
                       }
                       return null;
                     },
-                    obscureText: true,
+                    // obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0xffF6F6F6),

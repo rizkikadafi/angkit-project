@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:angkit_project/pages/register1.dart';
 import 'package:angkit_project/validator/login_validator.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,9 +22,31 @@ class _LoginPageState extends State<LoginPage> {
   FocusNode ufocusNode = FocusNode();
 
   void Login() async {
-    Uri uri = Uri.parse("http://angkit.ktsabit.com/checkUser");
 
-    Map data = {"username": usernameController.text};
+    // print(usernameController.text);
+    // print(passwordController.text);
+
+    Uri uri = Uri.parse("http://angkit.ktsabit.com/login");
+
+    Map data = {
+      "username": usernameController.text,
+      "password": passwordController.text
+    };
+
+    var result = await http.post(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data));
+
+    print(result.body);
+
+    Map check = jsonDecode(result.body);
+
+      if (check["status"] == "ok") {
+        // Navigator.of(context).push(MaterialPageRoute(builder: Home(context) => (password: passwordController.text, username: usernameController.text,)));
+    }
+    
   }
 
   @override
@@ -149,7 +173,9 @@ class _LoginPageState extends State<LoginPage> {
                       height: 50,
                       child: FilledButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {}
+                          if (_formKey.currentState!.validate()) {
+                            Login();
+                          }
                         },
                         child: const Text('Masuk'),
                       ),
