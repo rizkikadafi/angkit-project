@@ -19,7 +19,6 @@ class _RegisterPageState extends State<RegisterPage> {
   FocusNode ufocusNode = FocusNode();
 
   void Register() async {
-    // print(usernameController.text);
 
     Uri uri = Uri.parse("http://angkit.ktsabit.com/checkUser");
 
@@ -33,11 +32,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
     print(result.body);
 
-    Map apa = {"data": "Username available", "status": "ok"};
+    Map check = jsonDecode(result.body);
 
-    print(["status"]);
-
-    if (apa["status"] == "ok") {
+    if (check["status"] == "ok") {
       Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterStep2(password: passwordController.text, username: usernameController.text,)));
     }
   }

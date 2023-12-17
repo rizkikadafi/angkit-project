@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:angkit_project/pages/register1.dart';
+import 'package:angkit_project/validator/login_validator.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,9 +13,17 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   final usernameController = TextEditingController();
-  
+
+  final _formKey = GlobalKey<FormState>();
+
   FocusNode focusNode = FocusNode();
   FocusNode ufocusNode = FocusNode();
+
+  void Login() async {
+    Uri uri = Uri.parse("http://angkit.ktsabit.com/checkUser");
+
+    Map data = {"username": usernameController.text};
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,99 +63,99 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Masuk",
-                    style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                  const SizedBox(height: 35),
-                  TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
-                    // obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color(0xffF6F6F6),
-                      focusedBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xff66B357),
-                        ),
-                      ),
-                      enabledBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xffAFAFAF),
-                        ),
-                      ),
-                      labelText: 'Username',
-                      labelStyle: TextStyle(
-                          color: focusNode.hasFocus
-                              ? Color(0xff3C834B)
-                              : Colors.black54),
+              Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Masuk",
+                      style: TextStyle(
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
-                    controller: usernameController,
-                    onTap: () {
-                      setState(() {
-                        FocusScope.of(context).requestFocus(focusNode);
-                      });
-                    },
-                    focusNode: focusNode,
-                  ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color(0xffF6F6F6),
-                      focusedBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xff66B357),
+                    const SizedBox(height: 35),
+                    TextFormField(
+                      validator: textValidator,
+                      // obscureText: true,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: const Color(0xffF6F6F6),
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xff66B357),
+                          ),
                         ),
-                      ),
-                      enabledBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xffAFAFAF),
+                        enabledBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xffAFAFAF),
+                          ),
                         ),
+                        labelText: 'Username',
+                        labelStyle: TextStyle(
+                            color: focusNode.hasFocus
+                                ? Color(0xff3C834B)
+                                : Colors.black54),
                       ),
-                      labelText: 'Sandi',
-                      labelStyle: TextStyle(
-                          color: ufocusNode.hasFocus
-                              ? Color(0xff3C834B)
-                              : Colors.black54),
+                      controller: usernameController,
+                      onTap: () {
+                        setState(() {
+                          FocusScope.of(context).requestFocus(focusNode);
+                        });
+                      },
+                      focusNode: focusNode,
                     ),
-                    controller: passwordController,
-                    onTap: () {
-                      setState(() {
-                        FocusScope.of(context).requestFocus(ufocusNode);
-                      });
-                    },
-                    focusNode: ufocusNode,
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: FilledButton(
-                      onPressed: () {},
-                      child: const Text('Masuk'),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: const Color(0xffF6F6F6),
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xff66B357),
+                          ),
+                        ),
+                        enabledBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xffAFAFAF),
+                          ),
+                        ),
+                        labelText: 'Sandi',
+                        labelStyle: TextStyle(
+                            color: ufocusNode.hasFocus
+                                ? Color(0xff3C834B)
+                                : Colors.black54),
+                      ),
+                      controller: passwordController,
+                      onTap: () {
+                        setState(() {
+                          FocusScope.of(context).requestFocus(ufocusNode);
+                        });
+                      },
+                      focusNode: ufocusNode,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: FilledButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {}
+                        },
+                        child: const Text('Masuk'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 150),
               Column(

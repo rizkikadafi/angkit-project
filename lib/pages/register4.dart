@@ -3,15 +3,19 @@ import 'package:angkit_project/pages/login.dart';
 import 'package:angkit_project/components/custom_stepper.dart';
 
 class RegisterFinish extends StatefulWidget {
-  const RegisterFinish({super.key});
+  RegisterFinish({super.key, required this.password, required this.username, required this.role, required this.name, required this.location});
+
+  final password;
+  final username;
+  final role;
+  final name;
+  final location;
 
   @override
   State<RegisterFinish> createState() => _RegisterFinishState();
 }
 
 class _RegisterFinishState extends State<RegisterFinish> {
-  final passwordController = TextEditingController();
-  final usernameController = TextEditingController();
   FocusNode focusNode = FocusNode();
   FocusNode ufocusNode = FocusNode();
 

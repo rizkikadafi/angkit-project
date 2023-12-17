@@ -1,7 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:angkit_project/pages/register3.dart';
+import 'dart:convert';
 import 'package:angkit_project/pages/register1.dart';
+import 'package:angkit_project/pages/register3.dart';
 import 'package:angkit_project/components/custom_stepper.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:flutter/material.dart';
 
 class RegisterStep2 extends StatefulWidget {
   RegisterStep2({super.key, required this.password, required this.username});
@@ -13,12 +16,32 @@ class RegisterStep2 extends StatefulWidget {
   State<RegisterStep2> createState() => _RegisterStep2State();
 }
 
-enum Role { peternak, distributor }
-
 class _RegisterStep2State extends State<RegisterStep2> {
   FocusNode focusNode = FocusNode();
   FocusNode ufocusNode = FocusNode();
-  Role? role;
+
+  String role = '';
+
+  void Role() async {
+
+    print(widget.username);
+    print(widget.password);
+    print(role);
+
+    if (role != "") {
+      Uri uri = Uri.parse("http://angkit.ktsabit.com/register");
+
+      Map data = {"username": widget.username, "password": widget.password, "role": role};
+
+      print(data);
+
+      var result = await http.post(uri, headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8',}, body: jsonEncode(data));
+      
+      print(result.body);
+
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterStep3(password: widget.password, username: widget.username, role: role,)));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +69,13 @@ class _RegisterStep2State extends State<RegisterStep2> {
                   ),
                   const SizedBox(height: 20),
                   RadioListTile(
-                    value: Role.peternak,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    value: 'Peternakan',
                     groupValue: role,
                     onChanged: (val) {
                       setState(() {
-                        role = val;
+                        role = val!;
                       });
                     },
                     title: const Padding(
@@ -60,7 +85,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
                           Icon(Icons.factory_rounded),
                           SizedBox(width: 10),
                           Text(
-                            'Peternak',
+                            'Peternakan',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -75,11 +100,13 @@ class _RegisterStep2State extends State<RegisterStep2> {
                   ),
                   const Divider(),
                   RadioListTile(
-                    value: Role.distributor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    value: 'Distributor',
                     groupValue: role,
                     onChanged: (val) {
                       setState(() {
-                        role = val;
+                        role = val!;
                       });
                     },
                     title: const Padding(
@@ -98,21 +125,16 @@ class _RegisterStep2State extends State<RegisterStep2> {
                         ],
                       ),
                     ),
-                    subtitle: const Text(
-                        'Ngetik apa ya jadi distributor adalah benar'),
+                    subtitle: const Text('Bawa bebek pake motor. cakep!'),
                     controlAffinity: ListTileControlAffinity.trailing,
                   ),
                 ],
               ),
               SizedBox(
                 width: double.infinity,
-                height: 50,
                 child: FilledButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const RegisterStep3()));
-                  },
-                  child: const Text('Lanjut'),
+                  onPressed: Role,
+                  child: const Text("Lanjut"),
                 ),
               ),
               // const SizedBox(height: 20),
