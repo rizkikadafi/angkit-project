@@ -38,12 +38,16 @@ class _HomePageState extends State<HomePage> {
         children: [Text("item1")],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const BatchInputPage()));
         },
         shape: const CircleBorder(),
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          weight: 25,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: ClipRRect(
@@ -52,8 +56,10 @@ class _HomePageState extends State<HomePage> {
           topRight: Radius.circular(20),
         ),
         child: BottomAppBar(
+          surfaceTintColor: Theme.of(context).colorScheme.secondary,
           shape: const CircularNotchedRectangle(),
           notchMargin: 8.0,
+          elevation: 5,
           child: BottomNavigation(menuIcons: [
             MenuIcon(
               icon: Icons.home,
