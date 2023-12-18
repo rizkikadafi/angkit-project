@@ -6,3 +6,10 @@ FormFieldValidator<String> textValidator = (value) {
   }
   return null;
 };
+
+FormFieldValidator<String> passwordValidator = (value) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter your password';
+  }
+  return null;
+};

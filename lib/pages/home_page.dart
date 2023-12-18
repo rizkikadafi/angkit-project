@@ -40,8 +40,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const BatchInputPage()));
+          Navigator.pushNamed(context, '/batchInputPage');
         },
         shape: const CircleBorder(),
         child: const Icon(
