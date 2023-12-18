@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
 
     Map check = jsonDecode(result.body);
 
-      if (check["status"] == "ok") {
+      if (check["status"] == "ok") { // !!!!!!!!!! HOMEEEEEEEEEEEEEEEEEEEEEEEEEEE !!!!!
         // Navigator.of(context).push(MaterialPageRoute(builder: Home(context) => (password: passwordController.text, username: usernameController.text,)));
     }
     
