@@ -14,25 +14,25 @@ class RegisterController {
   }
 
   Future<bool> register() async {
-    // Uri uri = Uri.parse("http://angkit.ktsabit.com/checkUser");
+    Uri uri = Uri.parse("http://angkit.ktsabit.com/checkUser");
 
-    // Map data = {"username": username.text};
+    Map data = {"username": username.text};
 
-    // var result = await http.post(uri,
-    //     headers: <String, String>{
-    //       'Content-Type': 'application/json; charset=UTF-8',
-    //     },
-    //     body: jsonEncode(data));
+    var result = await http.post(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data));
 
-    // print(result.body);
+    print(result.body);
 
-    // Map check = jsonDecode(result.body);
+    Map check = jsonDecode(result.body);
 
-    // if (check["status"] == "ok") {
-    //   return true;
-    // }
-    // return false;
-    return true;
+    if (check["status"] == "ok") {
+      return true;
+    }
+    return false;
+    // return true;
   }
 
   Future<bool> registRole() async {
@@ -40,37 +40,37 @@ class RegisterController {
     print(password.text);
     print(role);
 
-    if (role != "") {
-      return true;
-    } else {
-      return false;
-    }
-
     // if (role != "") {
-    //   Uri uri = Uri.parse("http://angkit.ktsabit.com/register");
-
-    //   Map data = {"username": username.text, "password": password.text, "role": role};
-
-    //   print(data);
-
-    //   var result = await http.post(uri, headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8',}, body: jsonEncode(data));
-
-    //   print(result.body);
-
     //   return true;
     // } else {
     //   return false;
     // }
+
+    if (role != "") {
+      Uri uri = Uri.parse("http://angkit.ktsabit.com/register");
+
+      Map data = {"username": username.text, "password": password.text, "role": role};
+
+      print(data);
+
+      var result = await http.post(uri, headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8',}, body: jsonEncode(data));
+
+      print(result.body);
+
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<bool> information() async {
-    // Uri uri = Uri.parse("http://angkit.ktsabit.com/");
+    Uri uri = Uri.parse("http://angkit.ktsabit.com/");
 
-    // Map data = {"username": username.text, "password": password.text, "role": role, "": farmName.text, "": farmLocation.text,};
+    Map data = {"username": username.text, "password": password.text, "role": role, "": farmName.text, "": farmLocation.text,};
 
-    // var result = await http.post(uri, headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8',}, body: jsonEncode(data));
-    //
-    // print(result.body);
+    var result = await http.post(uri, headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8',}, body: jsonEncode(data));
+
+    print(result.body);
 
     return true;
     // prepare conditions when the request fails
