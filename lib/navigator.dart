@@ -1,4 +1,5 @@
 import 'package:angkit_project/pages/batch_input_page.dart';
+import 'package:angkit_project/pages/data_page.dart';
 import 'package:angkit_project/pages/home_page.dart';
 import 'package:angkit_project/pages/login_page.dart';
 import 'package:angkit_project/pages/register/register_page1.dart';
@@ -28,5 +29,6 @@ class SectionNavigator {
       return RegisterPage4(controller: args['controller']);
     },
     '/homePage': (context) => const HomePage(),
+    '/dataPage' : (context) => const DataPage(),
   };
 }

@@ -10,7 +10,15 @@ ThemeData themeData = ThemeData(
     primary: primaryColor,
     secondary: secondaryColor,
   ),
+
+  cardTheme: const CardTheme(
+    color: Colors.white,
+  ),
+
   textTheme: const TextTheme(
+    displayLarge: TextStyle(
+      fontSize: 24
+    ),
     titleSmall: TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,

@@ -35,7 +35,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
             ),
-            height: 200,
+            height: widget.topMarginBody!=null ?  widget.topMarginBody!+50 :200 ,
             child: Padding(
               padding: const EdgeInsets.only(right: 20, top: 20),
               child: AppBar(
@@ -52,10 +52,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
               ),
               child: widget.body,
             ),

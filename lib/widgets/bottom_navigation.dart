@@ -15,11 +15,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: _buildMenu(),
-        ));
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // children: _buildMenu(),
+        children: widget.menuIcons,
+      ),
+    );
   }
 
   List<MenuIcon> _buildMenu() {
@@ -38,17 +40,27 @@ class MenuIcon extends StatelessWidget {
   final String? title;
   final Color? activeIconColor;
   final Color? activeTextColor;
-  const MenuIcon({super.key, required this.icon, this.title, this.activeIconColor, this.activeTextColor});
+  const MenuIcon(
+      {super.key,
+      required this.icon,
+      this.title,
+      this.activeIconColor,
+      this.activeTextColor});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, color: activeIconColor ?? Colors.black,), 
-        Text(title ?? "", style: TextStyle(color: activeTextColor ?? Colors.black),)
+        Icon(
+          icon,
+          color: activeIconColor ?? Colors.black,
+        ),
+        Text(
+          title ?? "",
+          style: TextStyle(color: activeTextColor ?? Colors.black),
+        )
       ],
     );
   }
 }
-

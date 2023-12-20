@@ -116,7 +116,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
                     height: 50,
                     child: FilledButton(
                       onPressed: () {
-                        widget.controller.information().then((value) {
+                        widget.controller.information("").then((value) {
                           if(value) {
                             Navigator.of(context).pushReplacementNamed(
                               '/registerPage4',

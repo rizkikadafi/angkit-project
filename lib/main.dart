@@ -2,13 +2,22 @@ import 'package:angkit_project/navigator.dart';
 import 'package:angkit_project/pages/register/register_page1.dart';
 import 'package:angkit_project/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  String? username = preferences.getString("username");
+
+  debugPrint(username);
+
+  runApp(MyApp(username: username));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.username});
+
+  final String? username;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Angkit Agro',
       theme: themeData,
-      initialRoute: '/registerPage1',
+      initialRoute: username == null ? '/loginPage' : '/homePage',
       routes: SectionNavigator.routes,
     );
   }

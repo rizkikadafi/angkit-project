@@ -16,9 +16,11 @@ class _LoginPageState extends State<LoginPage> {
   FocusNode focusNode = FocusNode();
   FocusNode ufocusNode = FocusNode();
 
+  LoginController controller = LoginController();
+
+
   @override
   Widget build(BuildContext context) {
-    LoginController controller = LoginController();
 
     return Scaffold(
       body: Padding(

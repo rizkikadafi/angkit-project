@@ -49,11 +49,19 @@ class RegisterController {
     if (role != "") {
       Uri uri = Uri.parse("http://angkit.ktsabit.com/register");
 
-      Map data = {"username": username.text, "password": password.text, "role": role};
+      Map data = {
+        "username": username.text,
+        "password": password.text,
+        "role": role
+      };
 
       print(data);
 
-      var result = await http.post(uri, headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8',}, body: jsonEncode(data));
+      var result = await http.post(uri,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(data));
 
       print(result.body);
 
@@ -63,14 +71,21 @@ class RegisterController {
     }
   }
 
-  Future<bool> information() async {
+  Future<bool> information(String username) async {
     Uri uri = Uri.parse("http://angkit.ktsabit.com/");
 
-    Map data = {"username": username.text, "password": password.text, "role": role, "": farmName.text, "": farmLocation.text,};
+    Map data = {
+      "username": username,
+      "nama": farmName.text,
+      "lokasi": farmLocation.text,
+    };
 
-    var result = await http.post(uri, headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8',}, body: jsonEncode(data));
+    var result = await http.post(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data));
 
-    print(result.body);
 
     return true;
     // prepare conditions when the request fails
