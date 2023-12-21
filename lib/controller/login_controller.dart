@@ -14,11 +14,14 @@ class LoginController {
 
     Map data = {"username": username.text, "password": password.text};
 
-    var result = await http.post(uri,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(data));
+    var result = await http.post(
+      uri,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(data),
+    );
+    print(result.body);
 
     Map check = jsonDecode(result.body);
 

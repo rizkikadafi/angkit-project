@@ -3,8 +3,7 @@ import 'package:angkit_project/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage3 extends StatefulWidget {
-  final RegisterController controller;
-  const RegisterPage3({super.key, required this.controller});
+  const RegisterPage3({super.key});
 
   @override
   State<RegisterPage3> createState() => _RegisterPage3State();
@@ -32,7 +31,7 @@ class _RegisterPage3State extends State<RegisterPage3> {
                   const CustomStepper(step: 3),
                   const SizedBox(height: 50),
                   Text(
-                    "Informasi ${widget.controller.role}",
+                    "Informasi ${RegisterController.role}",
                     style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -60,13 +59,13 @@ class _RegisterPage3State extends State<RegisterPage3> {
                           color: Color(0xffAFAFAF),
                         ),
                       ),
-                      labelText: 'Nama ${widget.controller.role}',
+                      labelText: 'Nama ${RegisterController.role}',
                       labelStyle: TextStyle(
                           color: focusNode.hasFocus
                               ? Color(0xff3C834B)
                               : Colors.black54),
                     ),
-                    controller: widget.controller.farmName,
+                    controller: RegisterController.farmName,
                     onTap: () {
                       setState(() {
                         FocusScope.of(context).requestFocus(focusNode);
@@ -96,13 +95,13 @@ class _RegisterPage3State extends State<RegisterPage3> {
                           color: Color(0xffAFAFAF),
                         ),
                       ),
-                      labelText: 'Lokasi ${widget.controller.role}',
+                      labelText: 'Lokasi ${RegisterController.role}',
                       labelStyle: TextStyle(
                           color: ufocusNode.hasFocus
                               ? Color(0xff3C834B)
                               : Colors.black54),
                     ),
-                    controller: widget.controller.farmLocation,
+                    controller: RegisterController.farmLocation,
                     onTap: () {
                       setState(() {
                         FocusScope.of(context).requestFocus(ufocusNode);
@@ -116,13 +115,10 @@ class _RegisterPage3State extends State<RegisterPage3> {
                     height: 50,
                     child: FilledButton(
                       onPressed: () {
-                        widget.controller.information("").then((value) {
+                        RegisterController().information(RegisterController.username.text).then((value) {
                           if(value) {
                             Navigator.of(context).pushReplacementNamed(
                               '/registerPage4',
-                              arguments: {
-                                'controller': widget.controller,
-                              }
                             );
                             // print("ok");
                           }

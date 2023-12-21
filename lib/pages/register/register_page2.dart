@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flash/flash.dart';
 
 class RegisterPage2 extends StatefulWidget {
-  final RegisterController controller;
 
-  const RegisterPage2({super.key, required this.controller});
+  const RegisterPage2({super.key});
 
   @override
   State<RegisterPage2> createState() => _RegisterPage2State();
@@ -45,10 +44,10 @@ class _RegisterPage2State extends State<RegisterPage2> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     value: 'Peternakan',
-                    groupValue: widget.controller.role,
+                    groupValue: RegisterController.role,
                     onChanged: (val) {
                       setState(() {
-                        widget.controller.updateRole(val as String);
+                        RegisterController().updateRole(val as String);
                       });
                     },
                     title: const Padding(
@@ -76,10 +75,10 @@ class _RegisterPage2State extends State<RegisterPage2> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     value: 'Distributor',
-                    groupValue: widget.controller.role,
+                    groupValue: RegisterController.role,
                     onChanged: (val) {
                       setState(() {
-                        widget.controller.updateRole(val as String);
+                        RegisterController().updateRole(val as String);
                       });
                     },
                     title: const Padding(
@@ -107,13 +106,10 @@ class _RegisterPage2State extends State<RegisterPage2> {
                 width: double.infinity,
                 child: FilledButton(
                   onPressed: () {
-                    widget.controller.registRole().then((value) {
+                    RegisterController().registRole().then((value) {
                       if (value) {
                         Navigator.of(context).pushReplacementNamed(
                           '/registerPage3',
-                          arguments: {
-                            'controller': widget.controller,
-                          }
                         );
                       } else {
                         showFlash(

@@ -13,21 +13,9 @@ class SectionNavigator {
     '/batchInputPage': (context) => const BatchInputPage(),
     '/loginPage': (context) => const LoginPage(),
     '/registerPage1': (context) => const RegisterPage1(),
-    '/registerPage2': (context) {
-      final args =
-          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-      return RegisterPage2(controller: args['controller']);
-    },
-    '/registerPage3': (context) {
-      final args =
-          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-      return RegisterPage3(controller: args['controller']);
-    },
-    '/registerPage4': (context) {
-      final args =
-          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-      return RegisterPage4(controller: args['controller']);
-    },
+    '/registerPage2': (context) => const RegisterPage2(),
+    '/registerPage3': (context) => const RegisterPage3(),
+    '/registerPage4': (context) => const RegisterPage4(),
     '/homePage': (context) => const HomePage(),
     '/dataPage' : (context) => const DataPage(),
   };

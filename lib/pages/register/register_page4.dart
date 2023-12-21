@@ -3,8 +3,7 @@ import 'package:angkit_project/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage4 extends StatefulWidget {
-  final RegisterController controller;
-  const RegisterPage4({super.key, required this.controller});
+  const RegisterPage4({super.key});
 
   @override
   State<RegisterPage4> createState() => _RegisterPage4State();
@@ -13,6 +12,12 @@ class RegisterPage4 extends StatefulWidget {
 class _RegisterPage4State extends State<RegisterPage4> {
   FocusNode focusNode = FocusNode();
   FocusNode ufocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    RegisterController().dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

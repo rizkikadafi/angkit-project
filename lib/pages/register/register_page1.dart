@@ -69,7 +69,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
                               ? Color(0xff3C834B)
                               : Colors.black54),
                     ),
-                    controller: controller.username,
+                    controller: RegisterController.username,
                     onTap: () {
                       setState(() {
                         FocusScope.of(context).requestFocus(focusNode);
@@ -105,7 +105,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
                               ? Color(0xff3C834B)
                               : Colors.black54),
                     ),
-                    controller: controller.password,
+                    controller: RegisterController.password,
                     onTap: () {
                       setState(() {
                         FocusScope.of(context).requestFocus(ufocusNode);
