@@ -115,7 +115,7 @@ class BatchCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (ctx) => DetailPage(url: url)));
+              .push(MaterialPageRoute(builder: (ctx) => DetailPage(batch: batch)));
         },
         child: Padding(
           padding: EdgeInsets.only(bottom: 5),

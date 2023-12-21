@@ -35,6 +35,5 @@ class LoginController {
     }
     Fluttertoast.showToast(msg: check['status'], backgroundColor: Colors.red);
     return false;
-    return true;
   }
 }

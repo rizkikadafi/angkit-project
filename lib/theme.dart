@@ -3,6 +3,14 @@ import 'package:flutter/material.dart';
 const Color primaryColor = Color(0xff3A7E48);
 const Color secondaryColor = Color(0xff66B357);
 
+class AppTheme{
+  static TextStyle label = const TextStyle(
+    fontSize: 14,
+    color: Colors.grey,
+    fontWeight: FontWeight.bold,
+  );
+}
+
 ThemeData themeData = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(

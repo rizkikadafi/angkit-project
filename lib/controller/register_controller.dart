@@ -44,15 +44,6 @@ class RegisterController {
   }
 
   Future<bool> registRole() async {
-    print(username.text);
-    print(password.text);
-    print(role);
-
-    // if (role != "") {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
 
     if (role != "") {
       Uri uri = Uri.parse("http://angkit.ktsabit.com/register");
@@ -89,9 +80,6 @@ class RegisterController {
       "lokasi": farmLocation.text,
     };
 
-    print(data);
-    print("tksdfjl");
-
     var result = await http.post(
       uri,
       headers: <String, String>{
@@ -100,9 +88,9 @@ class RegisterController {
       body: jsonEncode(data),
     );
 
-    print(result.body);
-
-    return true;
-    // prepare conditions when the request fails
+    if (jsonDecode(result.body)['status'] == 'ok') {
+      return true;
+    }
+    return false;
   }
 }

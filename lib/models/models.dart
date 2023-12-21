@@ -24,6 +24,8 @@ class Batch {
   String? tglKemas;
   String? tglMulai;
   String? tglPotong;
+  String? nama;
+  String? spesies;
 
   Batch(
       {this.beratRtSample,
@@ -34,7 +36,10 @@ class Batch {
         this.peternak,
         this.tglKemas,
         this.tglMulai,
-        this.tglPotong});
+        this.tglPotong,
+        this.nama,
+        this.spesies,
+      });
 
   Batch.fromJson(Map<String, dynamic> json) {
     beratRtSample = json['berat_rt_sample'];
@@ -55,6 +60,8 @@ class Batch {
     tglKemas = json['tgl_kemas'];
     tglMulai = json['tgl_mulai'];
     tglPotong = json['tgl_potong'];
+    nama = json['nama'];
+    spesies = json['spesies'];
   }
 }
 

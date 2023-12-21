@@ -1,18 +1,22 @@
+import 'package:angkit_project/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class DetailPage extends StatelessWidget {
-  const DetailPage({super.key, required this.url});
+import '../models/models.dart';
 
-  final String url;
+class DetailPage extends StatelessWidget {
+  const DetailPage({super.key, required this.batch});
+
+  final Batch batch;
 
   @override
   Widget build(BuildContext context) {
+    final url = batch.images![0];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail Page'),
       ),
-      body: Column(
+      body: ListView(
         children: [
           AspectRatio(
             aspectRatio: 1.5,
@@ -25,7 +29,6 @@ class DetailPage extends StatelessWidget {
                     context: context,
                     builder: (ctx) {
                       return InteractiveViewer(
-
                         maxScale: 10,
                         child: Dialog(
                           child: CachedNetworkImage(
@@ -46,6 +49,26 @@ class DetailPage extends StatelessWidget {
               ),
             ),
           ),
+          // SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Detail Batch'),
+                Text('NAMA', style: AppTheme.label),
+                Text(batch.nama!),
+                Text('SPESIES', style: AppTheme.label),
+                Text(batch.spesies!),
+
+                // Container(
+                //   height: 20,
+                //   width: double.infinity,
+                //   color: Colors.red,
+                // )
+              ],
+            ),
+          )
         ],
       ),
     );
