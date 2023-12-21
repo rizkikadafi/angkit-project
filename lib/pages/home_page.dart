@@ -1,5 +1,7 @@
 import 'package:angkit_project/controller/bottom_navigation_controller.dart';
 import 'package:angkit_project/pages/batch_input_page.dart';
+import 'package:angkit_project/pages/login_page.dart';
+import 'package:angkit_project/pages/register/register_page1.dart';
 import 'package:angkit_project/widgets/bottom_navigation.dart';
 import 'package:angkit_project/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,9 @@ class _HomePageState extends State<HomePage> {
       BottomNavigationController();
   late SharedPreferences prefs;
   late String username;
+  int currentPageIndex = 0;
+  NavigationDestinationLabelBehavior labelBehavior =
+      NavigationDestinationLabelBehavior.onlyShowSelected;
 
   void getPrefs() async {
     prefs = await SharedPreferences.getInstance();
@@ -79,9 +84,7 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ],
-      body: const Column(
-        children: [Text("item1")],
-      ),
+      body: [LoginPage(), RegisterPage1()][currentPageIndex],
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
@@ -99,27 +102,26 @@ class _HomePageState extends State<HomePage> {
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
-        child: BottomAppBar(
-          surfaceTintColor: Theme.of(context).colorScheme.secondary,
-          shape: const CircularNotchedRectangle(),
-          notchMargin: 8.0,
-          elevation: 5,
-          child: BottomNavigation(
-            menuIcons: [
-              MenuIcon(
-                icon: Icons.home,
-                title: "Home",
-                activeIconColor: Theme.of(context).primaryColor,
-              ),
-              const MenuIcon(
-                icon: Icons.dataset,
-                title: "Data",
-              ),
-            ],
-            controller: bottomNavigationController,
-          ),
+        child: NavigationBar(
+          destinations: const <Widget>[
+            NavigationDestination(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.data_thresholding_rounded),
+              label: 'Data',
+            ),
+          ],
+          labelBehavior: labelBehavior,
+          selectedIndex: currentPageIndex,
+          onDestinationSelected: (int index) {
+            setState(() {
+            currentPageIndex = index;
+          });
+          },
         ),
-      ),
+        ),
     );
   }
 }
