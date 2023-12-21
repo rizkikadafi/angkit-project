@@ -10,8 +10,7 @@ enum LabelJenisTernak {
 }
 
 class CustomDropdown extends StatefulWidget {
-  final BatchInputController controller;
-  const CustomDropdown({super.key, required this.controller});
+  const CustomDropdown({super.key});
 
   @override
   State<CustomDropdown> createState() => _CustomDropdownState();
@@ -32,7 +31,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
       ),
       width: MediaQuery.of(context).size.width * 0.85,
       initialSelection: LabelJenisTernak.bebek,
-      controller: widget.controller.jenisTernak,
+      controller: BatchInputController.jenisTernak,
       dropdownMenuEntries: LabelJenisTernak.values
           .map<DropdownMenuEntry<LabelJenisTernak>>((LabelJenisTernak ternak) {
         return DropdownMenuEntry<LabelJenisTernak>(

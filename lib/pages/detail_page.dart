@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
@@ -27,16 +28,19 @@ class DetailPage extends StatelessWidget {
 
                         maxScale: 10,
                         child: Dialog(
-                          child: Image.network(
-                            'http://angkit.ktsabit.com/static/$url',
+                          child: CachedNetworkImage(
+                            imageUrl: 'http://angkit.ktsabit.com/static/$url',
                           ),
+                          // child: Image.network(
+                          //   'http://angkit.ktsabit.com/static/$url',
+                          // ),
                         ),
                       );
                     },
                   );
                 },
-                child: Image.network(
-                  'http://angkit.ktsabit.com/static/$url',
+                child: CachedNetworkImage(
+                  imageUrl: 'http://angkit.ktsabit.com/static/$url',
                   fit: BoxFit.cover,
                 ),
               ),

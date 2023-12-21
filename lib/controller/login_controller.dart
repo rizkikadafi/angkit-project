@@ -10,9 +10,6 @@ class LoginController {
   final password = TextEditingController();
 
   Future<bool> login() async {
-    print(username.text);
-    print(password.text);
-
     Uri uri = Uri.parse("http://angkit.ktsabit.com/login");
 
     Map data = {"username": username.text, "password": password.text};
@@ -23,18 +20,16 @@ class LoginController {
         },
         body: jsonEncode(data));
 
-    print(result.body);
-
     Map check = jsonDecode(result.body);
 
     if (check["status"] == "ok") {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("username", username.text);
+      prefs.setString("id", check['id']);
 
       // Navigator.of(context).push(MaterialPageRoute(builder: Home(context) => (password: passwordController.text, username: usernameController.text,)));
       return true;
     }
-    print(check);
     Fluttertoast.showToast(msg: check['status'], backgroundColor: Colors.red);
     return false;
     return true;

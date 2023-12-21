@@ -10,14 +10,13 @@ class DatePicker extends StatefulWidget {
 }
 
 class _DatePickerState extends State<DatePicker> {
-  BatchInputController controller = BatchInputController();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: const InputDecoration(
         label: Text('Tannggal Mulai'),
       ),
-      controller: controller.tannggalMulai,
+      controller: BatchInputController.tannggalMulai,
       readOnly: true,
       onTap: () async {
         DateTime? pickedDate = await showDatePicker(
@@ -29,7 +28,7 @@ class _DatePickerState extends State<DatePicker> {
         if (pickedDate != null) {
           String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
           setState(() {
-            controller.tannggalMulai.text =
+            BatchInputController.tannggalMulai.text =
                 formattedDate; //set output date to TextField value.
           });
         } else {}

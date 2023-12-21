@@ -4,6 +4,7 @@ import 'package:angkit_project/controller/bottom_navigation_controller.dart';
 import 'package:angkit_project/models/models.dart';
 import 'package:angkit_project/pages/detail_page.dart';
 import 'package:angkit_project/widgets/bottom_navigation.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -25,7 +26,7 @@ class _DataPageState extends State<DataPage> {
     debugPrint('hell0?');
     prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username')!;
-    String id = '969449cc5a78410eb11ca73f4eadb833';
+    String id = prefs.getString('id')!;
     Uri uri = Uri.parse('http://angkit.ktsabit.com/get_batches_by_farm');
     Map body = {
       "farm_id": id,
@@ -33,6 +34,7 @@ class _DataPageState extends State<DataPage> {
     Map<String, String> headers = {"Content-Type": "application/json"};
     final res = await http.post(uri, body: jsonEncode(body), headers: headers);
     if (res.statusCode == 200) {
+      print(res.body);
       Batches batches = Batches.fromJson(jsonDecode(res.body));
       return batches;
     }
@@ -65,32 +67,24 @@ class _DataPageState extends State<DataPage> {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
                 int len = snapshot.data!.batches!.length;
-                return GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2),
-                  itemCount: len,
-                  // crossAxisCount: 2,
-                  padding: const EdgeInsets.all(15),
-                  itemBuilder: (ctx, index) {
-                    return BatchCard(
-                      batch: snapshot.data!.batches![index],
-                    );
-                  },
-                  // children: const [
-                  //   BatchCard(
-                  //     id: 'fji9Y3',
-                  //     url: '25ca4ca806ee4bc19802d8e469f58803.jpeg',
-                  //   ),
-                  // BatchCard(
-                  //   id: 'fji9Y3',
-                  //   url: '25ca4ca806ee4bc19802d8e469f58803.jpeg',
-                  // ),
-                  // BatchCard(
-                  //   id: 'fji9Y3',
-                  //   url: '25ca4ca806ee4bc19802d8e469f58803.jpeg',
-                  // ),
-                  // ],
-                );
+                print(len);
+                if (len != 0) {
+                  return GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemCount: len,
+                    // crossAxisCount: 2,
+                    padding: const EdgeInsets.all(15),
+                    itemBuilder: (ctx, index) {
+                      return BatchCard(
+                        batch: snapshot.data!.batches![index],
+                      );
+                    },
+                  );
+                } else {
+                  return const Center(child: Text("No Batches"));
+                }
               }
               return const Center(child: Text("No Batches"));
             }
@@ -131,11 +125,15 @@ class BatchCard extends StatelessWidget {
               children: [
                 AspectRatio(
                   aspectRatio: 1,
-                  child: Image.network(
-                    'http://angkit.ktsabit.com/static/$url',
-                    // 'https://placehold.co/500x500?text=No%20image',
+                  child: CachedNetworkImage(
+                    imageUrl: 'http://angkit.ktsabit.com/static/$url',
                     fit: BoxFit.cover,
                   ),
+                  // child: Image.network(
+                  //   'http://angkit.ktsabit.com/static/$url',
+                  //   // 'https://placehold.co/500x500?text=No%20image',
+                  //   fit: BoxFit.cover,
+                  // ),
                 ),
                 Positioned(
                   bottom: 0,

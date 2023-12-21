@@ -52,26 +52,26 @@ class _HomePageState extends State<HomePage> {
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.exit_to_app, color: Colors.red, size: 32),
+          icon: const Icon(Icons.exit_to_app, color: Colors.red, size: 32),
           onPressed: () {
             showDialog(
                 context: context,
                 builder: (ctx) {
                   return AlertDialog(
-                    title: Text("Logout sekarang?"),
-                    content: Text("YAKINNNNNNNN?????????"),
+                    title: const Text("Logout sekarang?"),
+                    content: const Text("YAKINNNNNNNN?????????"),
                     actions: [
                       FilledButton.tonal(onPressed: () {
                         Navigator.of(context).pushNamed('/dataPage');
                         // Navigator.of(context).pop();
-                      }, child: Text("Tidak"),),
+                      }, child: const Text("Tidak"),),
                       FilledButton(
                         onPressed: () {
                           prefs.remove("username");
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               '/loginPage', (route) => false);
                         },
-                        child: Text("Ya"),
+                        child: const Text("Ya"),
                       ),
                     ],
                   );

@@ -11,16 +11,7 @@ class Batches {
       });
     }
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (batches != null) {
-      data['batches'] = batches!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
-
 
 
 class Batch {
@@ -28,7 +19,6 @@ class Batch {
   Distributor? distributor;
   String? id;
   List<String>? images;
-  // List<Images>? images;
   String? jenisTernak;
   Distributor? peternak;
   String? tglKemas;
@@ -52,12 +42,6 @@ class Batch {
         ? Distributor.fromJson(json['distributor'])
         : null;
     id = json['id'];
-    // if (json['images'] != null) {
-    //   images = <Images>[];
-    //   json['images'].forEach((v) {
-    //     images!.add(Images.fromJson(v));
-    //   });
-    // }
     if (json['images'] != null) {
       images = <String>[];
       json['images'].forEach((v) {
@@ -72,26 +56,6 @@ class Batch {
     tglMulai = json['tgl_mulai'];
     tglPotong = json['tgl_potong'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['berat_rt_sample'] = beratRtSample;
-    if (distributor != null) {
-      data['distributor'] = distributor!.toJson();
-    }
-    data['id'] = id;
-    // if (images != null) {
-    //   data['images'] = images!.map((v) => v.toJson()).toList();
-    // }
-    data['jenis_ternak'] = jenisTernak;
-    if (peternak != null) {
-      data['peternak'] = peternak!.toJson();
-    }
-    data['tgl_kemas'] = tglKemas;
-    data['tgl_mulai'] = tglMulai;
-    data['tgl_potong'] = tglPotong;
-    return data;
-  }
 }
 
 class Distributor {
@@ -105,32 +69,5 @@ class Distributor {
     id = json['id'];
     lokasi = json['lokasi'];
     nama = json['nama'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['lokasi'] = lokasi;
-    data['nama'] = nama;
-    return data;
-  }
-}
-
-class Images {
-  String? filename;
-  int? id;
-
-  Images({this.filename, this.id});
-
-  Images.fromJson(Map<String, dynamic> json) {
-    filename = json['filename'];
-    id = json['id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['filename'] = filename;
-    data['id'] = id;
-    return data;
   }
 }
