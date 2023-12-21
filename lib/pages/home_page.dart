@@ -1,5 +1,7 @@
 import 'package:angkit_project/controller/bottom_navigation_controller.dart';
 import 'package:angkit_project/pages/batch_input_page.dart';
+import 'package:angkit_project/pages/dashbord_page.dart';
+import 'package:angkit_project/pages/data_page.dart';
 import 'package:angkit_project/pages/login_page.dart';
 import 'package:angkit_project/pages/register/register_page1.dart';
 import 'package:angkit_project/widgets/bottom_navigation.dart';
@@ -39,56 +41,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      topMarginBody: 200,
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            "Selamat datang, $username",
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          Text(
-            "Peternak",
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-        ],
-      ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.exit_to_app, color: Colors.red, size: 32),
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (ctx) {
-                return AlertDialog(
-                  title: const Text("Logout sekarang?"),
-                  content: const Text("YAKINNNNNNNN?????????"),
-                  actions: [
-                    FilledButton.tonal(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/dataPage');
-                        // Navigator.of(context).pop();
-                      },
-                      child: const Text("Tidak"),
-                    ),
-                    FilledButton(
-                      onPressed: () {
-                        prefs.remove("username");
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/loginPage', (route) => false);
-                      },
-                      child: const Text("Ya"),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-        ),
-      ],
-      body: [LoginPage(), RegisterPage1()][currentPageIndex],
+    return Scaffold(
+      body: [
+        const DashboardPage(),
+        const DataPage(),
+      ][currentPageIndex],
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
@@ -101,38 +58,47 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-        child: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          notchMargin: 8,
-          elevation: 5,
-          shadowColor: Colors.transparent,
-          // color: Colors.red,
-          child: NavigationBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            destinations: const <Widget>[
-              NavigationDestination(
-                icon: Icon(Icons.home),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 5,
+        elevation: 35,
+        shadowColor: Colors.green,
+        color: Colors.white,
+        surfaceTintColor: Colors.transparent,
+        child: NavigationBar(
+          indicatorColor: Colors.transparent,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          destinations: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 50),
+              child: NavigationDestination(
+                icon: Icon(
+                  Icons.home,
+                  color: currentPageIndex == 0 ? Colors.green : Colors.black54,
+                ),
                 label: 'Home',
               ),
-              NavigationDestination(
-                icon: Icon(Icons.data_thresholding_rounded),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 50),
+              child: NavigationDestination(
+                tooltip: 'yes',
+                icon: Icon(
+                  Icons.data_thresholding_rounded,
+                  color: currentPageIndex == 1 ? Colors.green : Colors.black54,
+                ),
                 label: 'Data',
               ),
-            ],
-            labelBehavior: labelBehavior,
-            selectedIndex: currentPageIndex,
-            onDestinationSelected: (int index) {
-              setState(() {
-                currentPageIndex = index;
-              });
-            },
-          ),
+            ),
+          ],
+          labelBehavior: labelBehavior,
+          selectedIndex: currentPageIndex,
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
         ),
       ),
     );
