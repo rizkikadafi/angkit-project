@@ -7,12 +7,14 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BatchInputController {
-  static final jenisTernak = TextEditingController();
-  static final tannggalMulai = TextEditingController();
-  static final nama = TextEditingController();
-  static final spesies = TextEditingController();
-
-  static Future<void> sendData(File file) async {
+  static Future<void> sendData(
+    File file,
+    BuildContext ctx,
+    String jenisTernak,
+    String tanggalMulai,
+    String nama,
+    String spesies,
+  ) async {
     Uri addBatchUri = Uri.parse('http://angkit.ktsabit.com/inputBatch');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString("username")!;
@@ -25,20 +27,27 @@ class BatchInputController {
       "distributor": null,
       "tanggalPotong": null,
       "tanggalKemas": null,
-      "jenisTernak": jenisTernak.text,
+      "jenisTernak": jenisTernak,
       "peternak": id,
-      "tanggalMulai": tannggalMulai.text,
-      "nama":nama.text,
-      "spesies":spesies.text,
+      "tanggalMulai": tanggalMulai,
+      "nama": nama,
+      "spesies": spesies,
     };
 
-    Map<String, String> headers = {
-      'Content-Type': 'application/json'
-    };
 
-    final res = await http.post(addBatchUri, body: jsonEncode(data), headers: headers);
+    Map<String, String> headers = {'Content-Type': 'application/json'};
 
-    Map resData = jsonDecode(res.body);
+    final res =
+        await http.post(addBatchUri, body: jsonEncode(data), headers: headers);
+
+    Map resData;
+    try {
+      resData = jsonDecode(res.body);
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+      return;
+    }
+
     if (res.statusCode != 201) {
       Fluttertoast.showToast(msg: resData['message']);
       return;
@@ -62,13 +71,20 @@ class BatchInputController {
     request.fields['batch_id'] = batchId;
     final result = await request.send();
     debugPrint(await result.stream.bytesToString());
-    request.send().then((response) async {
-      if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
-        Fluttertoast.showToast(msg: 'success');
-      }
-      // var a = await response.stream.bytesToString();
-      // print(a);
-    });
+
+    if (result.statusCode == 201) {
+      Fluttertoast.showToast(msg: 'success');
+      Navigator.of(ctx).pop();
+    }
+    // final res = await request.send();
+    // request.send().then((response) async {
+    //   print(response.statusCode);
+    //   if (response.statusCode == 201) {
+    //     print(await response.stream.bytesToString());
+    //     Fluttertoast.showToast(msg: 'success');
+    //   }
+    //   // var a = await response.stream.bytesToString();
+    //   // print(a);
+    // });
   }
 }

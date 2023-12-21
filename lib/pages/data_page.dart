@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:angkit_project/controller/bottom_navigation_controller.dart';
 import 'package:angkit_project/models/models.dart';
 import 'package:angkit_project/pages/detail_page.dart';
-import 'package:angkit_project/widgets/bottom_navigation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,15 +15,11 @@ class DataPage extends StatefulWidget {
 }
 
 class _DataPageState extends State<DataPage> {
-  BottomNavigationController bottomNavigationController =
-      BottomNavigationController();
 
   late SharedPreferences prefs;
 
   Future<Batches?> getBatches() async {
-    debugPrint('hell0?');
     prefs = await SharedPreferences.getInstance();
-    String username = prefs.getString('username')!;
     String id = prefs.getString('id')!;
     Uri uri = Uri.parse('http://angkit.ktsabit.com/get_batches_by_farm');
     Map body = {
@@ -34,20 +28,15 @@ class _DataPageState extends State<DataPage> {
     Map<String, String> headers = {"Content-Type": "application/json"};
     final res = await http.post(uri, body: jsonEncode(body), headers: headers);
     if (res.statusCode == 200) {
-      print(res.body);
       Batches batches = Batches.fromJson(jsonDecode(res.body));
       return batches;
     }
-
-    print(res.body);
     return null;
   }
 
   @override
   void initState() {
     getBatches();
-    print("why");
-    // TODO: implement initState
     super.initState();
   }
 
@@ -56,10 +45,10 @@ class _DataPageState extends State<DataPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: Text("Data"),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.person_rounded))
-        ],
+        title: const Text("Data"),
+        // actions: [
+        //   IconButton(onPressed: () {}, icon: const Icon(Icons.person_rounded))
+        // ],
       ),
       body: FutureBuilder(
           future: getBatches(),
@@ -67,7 +56,6 @@ class _DataPageState extends State<DataPage> {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData) {
                 int len = snapshot.data!.batches!.length;
-                print(len);
                 if (len != 0) {
                   return GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -118,7 +106,7 @@ class BatchCard extends StatelessWidget {
               .push(MaterialPageRoute(builder: (ctx) => DetailPage(batch: batch)));
         },
         child: Padding(
-          padding: EdgeInsets.only(bottom: 5),
+          padding: const EdgeInsets.only(bottom: 5),
           child: Card(
             clipBehavior: Clip.antiAlias,
             child: Stack(
@@ -155,7 +143,7 @@ class BatchCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            batch.id!,
+                            batch.nama!,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           // Padding(

@@ -19,6 +19,46 @@ ThemeData themeData = ThemeData(
     secondary: secondaryColor,
   ),
 
+  inputDecorationTheme: InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(15.0),
+      borderSide: const BorderSide(
+        width: 0,
+        style: BorderStyle.none,
+      ),
+    ),
+    alignLabelWithHint: false,
+    floatingLabelBehavior: FloatingLabelBehavior.never,
+    labelStyle: const TextStyle(
+      color: Colors.black54
+    ),
+
+    contentPadding: EdgeInsets.all(16),
+    
+    filled: true,
+    fillColor: Colors.grey.shade200,
+
+  ),
+
+  dropdownMenuTheme: DropdownMenuThemeData(
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15.0),
+        borderSide: const BorderSide(
+          width: 0,
+          style: BorderStyle.none,
+        ),
+      ),
+      alignLabelWithHint: false,
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+      labelStyle: const TextStyle(
+          color: Colors.black54
+      ),
+      filled: true,
+      fillColor: Colors.grey.shade200,
+    ),
+  ),
+
   cardTheme: const CardTheme(
     color: Colors.white,
   ),

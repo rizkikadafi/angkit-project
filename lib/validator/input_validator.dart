@@ -13,3 +13,11 @@ FormFieldValidator<String> passwordValidator = (value) {
   }
   return null;
 };
+
+FormFieldValidator<String> emptyValidator = (value) {
+  if (value == null || value.isEmpty) {
+    return 'This field can\'t be empty';
+  }
+  return null;
+};
+

@@ -13,7 +13,7 @@ class _BatchInputPageState extends State<BatchInputPage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      topMarginBody: 150,
+      topMarginBody: 120,
       foregroundColor: Colors.white,
       title: const Text("Input Batch"),
       body: Padding(

@@ -9,36 +9,33 @@ enum LabelJenisTernak {
   final String label;
 }
 
-class CustomDropdown extends StatefulWidget {
-  const CustomDropdown({super.key});
+class CustomDropdown extends StatelessWidget {
+   CustomDropdown({super.key, required this.callback});
 
-  @override
-  State<CustomDropdown> createState() => _CustomDropdownState();
-}
+   final Function(String) callback;
 
-class _CustomDropdownState extends State<CustomDropdown> {
+  final TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return DropdownMenu<LabelJenisTernak>(
+      onSelected: (val) {
+        callback(val!.label);
+      },
+      controller: controller,
       label: const Text("Jenis Ternak"),
       requestFocusOnTap: true,
-      inputDecorationTheme: const InputDecorationTheme(
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(
-            width: 2,
-          )
-        ),
-      ),
       width: MediaQuery.of(context).size.width * 0.85,
       initialSelection: LabelJenisTernak.bebek,
-      controller: BatchInputController.jenisTernak,
-      dropdownMenuEntries: LabelJenisTernak.values
-          .map<DropdownMenuEntry<LabelJenisTernak>>((LabelJenisTernak ternak) {
-        return DropdownMenuEntry<LabelJenisTernak>(
-          value: ternak,
-          label: ternak.label,
-        );
-      }).toList(),
+      dropdownMenuEntries:
+          LabelJenisTernak.values.map<DropdownMenuEntry<LabelJenisTernak>>(
+        (LabelJenisTernak ternak) {
+          return DropdownMenuEntry<LabelJenisTernak>(
+            value: ternak,
+            label: ternak.label,
+          );
+        },
+      ).toList(),
     );
   }
 }

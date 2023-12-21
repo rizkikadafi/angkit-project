@@ -1,13 +1,7 @@
 import 'package:angkit_project/controller/bottom_navigation_controller.dart';
-import 'package:angkit_project/pages/batch_input_page.dart';
 import 'package:angkit_project/pages/dashbord_page.dart';
 import 'package:angkit_project/pages/data_page.dart';
-import 'package:angkit_project/pages/login_page.dart';
-import 'package:angkit_project/pages/register/register_page1.dart';
-import 'package:angkit_project/widgets/bottom_navigation.dart';
-import 'package:angkit_project/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,26 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  BottomNavigationController bottomNavigationController =
-      BottomNavigationController();
-  late SharedPreferences prefs;
-  late String username;
+
   int currentPageIndex = 0;
+
+
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.onlyShowSelected;
-
-  void getPrefs() async {
-    prefs = await SharedPreferences.getInstance();
-    setState(() {
-      username = prefs.getString("username")!;
-    });
-  }
-
-  @override
-  void initState() {
-    getPrefs();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +34,7 @@ class _HomePageState extends State<HomePage> {
         shape: const CircleBorder(),
         child: const Icon(
           Icons.add,
+          color: Colors.white,
           weight: 100,
         ),
       ),

@@ -135,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                             controller.login().then((value) {
                               if(value) {
-                                Navigator.of(context).pushReplacementNamed('/homePage');
+                                Navigator.of(context).pushNamedAndRemoveUntil('/homePage', (a)=>false);
                               }
                             });
                           // if (_formKey.currentState!.validate()) {

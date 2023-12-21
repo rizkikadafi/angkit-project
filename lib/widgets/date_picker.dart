@@ -2,21 +2,30 @@ import 'package:angkit_project/controller/batch_input_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../validator/input_validator.dart';
+
 class DatePicker extends StatefulWidget {
-  const DatePicker({super.key});
+  const DatePicker({super.key, required this.callback});
+
+  final Function(String) callback;
+
 
   @override
   State<DatePicker> createState() => _DatePickerState();
 }
 
 class _DatePickerState extends State<DatePicker> {
+
+  final controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      validator: emptyValidator,
       decoration: const InputDecoration(
-        label: Text('Tannggal Mulai'),
+        label: Text('Tekan untuk pilih tanggal'),
       ),
-      controller: BatchInputController.tannggalMulai,
       readOnly: true,
       onTap: () async {
         DateTime? pickedDate = await showDatePicker(
@@ -28,9 +37,9 @@ class _DatePickerState extends State<DatePicker> {
         if (pickedDate != null) {
           String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
           setState(() {
-            BatchInputController.tannggalMulai.text =
-                formattedDate; //set output date to TextField value.
+            controller.text = formattedDate;
           });
+          widget.callback(formattedDate);
         } else {}
       },
     );
