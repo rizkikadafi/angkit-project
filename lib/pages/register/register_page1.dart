@@ -51,6 +51,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
                     },
                     // obscureText: true,
                     decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.auto,
                       filled: true,
                       fillColor: const Color(0xffF6F6F6),
                       focusedBorder: const UnderlineInputBorder(
@@ -87,6 +88,7 @@ class _RegisterPage1State extends State<RegisterPage1> {
                     },
                     obscureText: true,
                     decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.auto,
                       filled: true,
                       fillColor: const Color(0xffF6F6F6),
                       focusedBorder: const UnderlineInputBorder(

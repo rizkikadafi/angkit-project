@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,7 +35,6 @@ class BatchInputController {
       "spesies": spesies,
     };
 
-
     Map<String, String> headers = {'Content-Type': 'application/json'};
 
     final res =
@@ -63,9 +63,25 @@ class BatchInputController {
 
     var request = http.MultipartRequest("POST", uri);
     debugPrint(file.path);
+
+
+    int dotIndex = file.absolute.path.lastIndexOf('.');
+    String ext = file.absolute.path.substring(dotIndex);
+    String fileName = file.absolute.path.substring(0, dotIndex);
+
+    String outputPath = "${fileName}_out$ext";
+
+
+    var compressedFile = await FlutterImageCompress.compressAndGetFile(
+      file.absolute.path,
+      outputPath,
+      quality: 20,
+    );
+
     request.files.add(http.MultipartFile.fromBytes(
       'file',
-      await file.readAsBytes(),
+      // await file.readAsBytes(),
+      await compressedFile!.readAsBytes(),
       filename: 'myImage.png',
     ));
     request.fields['batch_id'] = batchId;

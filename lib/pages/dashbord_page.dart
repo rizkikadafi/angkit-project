@@ -11,7 +11,9 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   late SharedPreferences prefs;
 
-  void logout(BuildContext context) {
+  void logout(BuildContext context) async {
+    prefs = await SharedPreferences.getInstance();
+    if (!mounted) return;
     showDialog(
       context: context,
       builder: (ctx) {
