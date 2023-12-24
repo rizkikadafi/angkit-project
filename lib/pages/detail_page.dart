@@ -12,6 +12,8 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final url = batch.images![0];
+    // final url = batch.images!.isEmpty ? 'no-image.png' : batch.images![0];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail Page'),

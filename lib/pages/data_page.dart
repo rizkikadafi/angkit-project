@@ -65,6 +65,7 @@ class _DataPageState extends State<DataPage> {
                     // crossAxisCount: 2,
                     padding: const EdgeInsets.all(15),
                     itemBuilder: (ctx, index) {
+                      // print(index);
                       return BatchCard(
                         batch: snapshot.data!.batches![index],
                       );
@@ -97,7 +98,11 @@ class BatchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // print(jsonEncode(batch));
     final url = batch.images![0];
+
+    // final url = batch.images!.isEmpty ? 'no-image.png' : batch.images![0];
     return Hero(
       tag: url,
       child: GestureDetector(
@@ -105,62 +110,59 @@ class BatchCard extends StatelessWidget {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (ctx) => DetailPage(batch: batch)));
         },
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 5),
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            child: Stack(
-              children: [
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: CachedNetworkImage(
-                    imageUrl: 'http://angkit.ktsabit.com/static/$url',
-                    fit: BoxFit.cover,
-                  ),
-                  // child: Image.network(
-                  //   'http://angkit.ktsabit.com/static/$url',
-                  //   // 'https://placehold.co/500x500?text=No%20image',
-                  //   fit: BoxFit.cover,
-                  // ),
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: Stack(
+            children: [
+              AspectRatio(
+                aspectRatio: 1,
+                child: CachedNetworkImage(
+                  imageUrl: 'http://angkit.ktsabit.com/static/$url',
+                  fit: BoxFit.cover,
                 ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    height: MediaQuery.of(context).size.width / 1.2,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.center,
-                        colors: [Colors.black, Colors.transparent],
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            batch.nama!,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          // Padding(
-                          //   padding: const EdgeInsets.all(4.0),
-                          //   child: GestureDetector(
-                          //     onTap: () {},
-                          //     child: const Icon(Icons.edit, color: Colors.white),
-                          //     // style: IconButton.styleFrom(backgroundColor: Colors.greenAccent),
-                          //   ),
-                          // ),
-                        ],
-                      ),
+                // child: Image.network(
+                //   'http://angkit.ktsabit.com/static/$url',
+                //   // 'https://placehold.co/500x500?text=No%20image',
+                //   fit: BoxFit.cover,
+                // ),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: MediaQuery.of(context).size.width / 1.2,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.center,
+                      colors: [Colors.black, Colors.transparent],
                     ),
                   ),
-                )
-              ],
-            ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          batch.nama!,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(4.0),
+                        //   child: GestureDetector(
+                        //     onTap: () {},
+                        //     child: const Icon(Icons.edit, color: Colors.white),
+                        //     // style: IconButton.styleFrom(backgroundColor: Colors.greenAccent),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),
