@@ -1,3 +1,4 @@
+import 'package:angkit_project/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,63 +51,94 @@ class _DashboardPageState extends State<DashboardPage> {
       if (snapshot.connectionState == ConnectionState.done) {
         if (snapshot.hasData) {
           String username = snapshot.data!.getString('username')!;
-          return Scaffold(
-            extendBodyBehindAppBar: true,
-            backgroundColor: Theme.of(context).primaryColor,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.exit_to_app, color: Colors.red, size: 32),
-                  onPressed: () => logout(context),
-                ),
-              ],
-            ),
-            body: Column(
+          return CustomScaffold(
+            topMarginBody: 120,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.exit_to_app, color: Colors.red, size: 32),
+                onPressed: () => logout(context),
+              ),
+            ],
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  color: Theme.of(context).primaryColor,
-                  height: 150,
-                  width: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).padding.top + 10, left: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Halo $username!',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const Text(
-                          'Peternak',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 32,
-
-                            fontWeight: FontWeight.bold,
-
-                          ),
-                        ),
-                      ],
-                    ),
+                Text(
+                  'Halo $username!',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(40))),
-                    width: double.infinity,
+                const Text(
+                  'Peternak',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32,
+
+                    fontWeight: FontWeight.bold,
+
                   ),
                 ),
               ],
             ),
+
+            // extendBodyBehindAppBar: true,
+            // backgroundColor: Theme.of(context).primaryColor,
+            // appBar: AppBar(
+            //   backgroundColor: Colors.transparent,
+            //   actions: [
+            //     IconButton(
+            //       icon: const Icon(Icons.exit_to_app, color: Colors.red, size: 32),
+            //       onPressed: () => logout(context),
+            //     ),
+            //   ],
+            // ),
+            // body: Column(
+            //   children: [
+            //     Container(
+            //       color: Theme.of(context).primaryColor,
+            //       height: 150,
+            //       width: double.infinity,
+            //       child: Padding(
+            //         padding: EdgeInsets.only(
+            //             top: MediaQuery.of(context).padding.top + 10, left: 16),
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             Text(
+            //               'Halo $username!',
+            //               style: const TextStyle(
+            //                 color: Colors.white,
+            //                 fontSize: 24,
+            //                 fontWeight: FontWeight.w600,
+            //               ),
+            //             ),
+            //             const Text(
+            //               'Peternak',
+            //               style: TextStyle(
+            //                 color: Colors.white,
+            //                 fontSize: 32,
+
+            //                 fontWeight: FontWeight.bold,
+
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //     // Expanded(
+            //     //   child: Container(
+            //     //     decoration: const BoxDecoration(
+            //     //         color: Colors.white,
+            //     //         borderRadius:
+            //     //         BorderRadius.vertical(top: Radius.circular(40))),
+            //     //     width: double.infinity,
+            //     //   ),
+            //     // ),
+            //   ],
+            // ),
           );
         }
         else {

@@ -9,6 +9,12 @@ class AppTheme{
     color: Colors.grey,
     fontWeight: FontWeight.bold,
   );
+
+  static TextStyle labelLg = const TextStyle(
+    fontSize: 18,
+    color: Colors.grey,
+    fontWeight: FontWeight.bold,
+  );
 }
 
 ThemeData themeData = ThemeData(

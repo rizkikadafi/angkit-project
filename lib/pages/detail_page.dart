@@ -1,4 +1,5 @@
 import 'package:angkit_project/theme.dart';
+import 'package:angkit_project/widgets/custom_scaffold.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +15,11 @@ class DetailPage extends StatelessWidget {
     final url = batch.images![0];
     // final url = batch.images!.isEmpty ? 'no-image.png' : batch.images![0];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Detail Page'),
-      ),
+    return CustomScaffold(
+      title: const Text('Detail Batch'),
+      topMarginBody: 120,
       body: ListView(
+        padding: const EdgeInsets.only(top: 10),
         children: [
           AspectRatio(
             aspectRatio: 1.5,
@@ -44,9 +45,15 @@ class DetailPage extends StatelessWidget {
                     },
                   );
                 },
-                child: CachedNetworkImage(
-                  imageUrl: 'http://angkit.ktsabit.com/static/$url',
-                  fit: BoxFit.cover,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: CachedNetworkImage(
+                      imageUrl: 'http://angkit.ktsabit.com/static/$url',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -57,10 +64,9 @@ class DetailPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Detail Batch'),
-                Text('NAMA', style: AppTheme.label),
+                Text('NAMA', style: AppTheme.labelLg),
                 Text(batch.nama!),
-                Text('SPESIES', style: AppTheme.label),
+                Text('SPESIES', style: AppTheme.labelLg),
                 Text(batch.spesies!),
 
                 // Container(

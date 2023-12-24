@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:angkit_project/models/models.dart';
 import 'package:angkit_project/pages/detail_page.dart';
+import 'package:angkit_project/widgets/custom_scaffold.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,14 +43,16 @@ class _DataPageState extends State<DataPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: const Text("Data"),
-        // actions: [
-        //   IconButton(onPressed: () {}, icon: const Icon(Icons.person_rounded))
-        // ],
-      ),
+    return CustomScaffold (
+      // appBar: AppBar(
+      //   centerTitle: false,
+      //   title: const Text("Data"),
+      //   // actions: [
+      //   //   IconButton(onPressed: () {}, icon: const Icon(Icons.person_rounded))
+      //   // ],
+      // ),
+      title: const Text("Data"),
+      topMarginBody: 120,
       body: FutureBuilder(
           future: getBatches(),
           builder: (ctx, snapshot) {
@@ -63,7 +66,7 @@ class _DataPageState extends State<DataPage> {
                     ),
                     itemCount: len,
                     // crossAxisCount: 2,
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.only(right:10, left: 10, top: 20),
                     itemBuilder: (ctx, index) {
                       // print(index);
                       return BatchCard(
