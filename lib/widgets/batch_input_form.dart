@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class BatchInputForm extends StatefulWidget {
-  final VoidCallback? onSubmit;
+  // final VoidCallback? onSubmit;
 
-  const BatchInputForm({super.key, this.onSubmit});
+  // const BatchInputForm({super.key, this.onSubmit});
   @override
   State<BatchInputForm> createState() => _BatchInputFormState();
 }
@@ -216,7 +216,7 @@ class _BatchInputFormState extends State<BatchInputForm> {
                           );
                           return;
                         }
-                        widget.onSubmit?.call();
+                        // widget.onSubmit?.call();
                         BatchInputController.sendData(
                           image,
                           context,

@@ -27,8 +27,9 @@ class LoginController {
 
     if (check["status"] == "ok") {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("username", username.text);
+      prefs.setString("username", check['user']);
       prefs.setString("id", check['id']);
+      prefs.setString("role", check['role']);
 
       // Navigator.of(context).push(MaterialPageRoute(builder: Home(context) => (password: passwordController.text, username: usernameController.text,)));
       return true;

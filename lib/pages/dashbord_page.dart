@@ -50,6 +50,7 @@ class _DashboardPageState extends State<DashboardPage> {
       if (snapshot.connectionState == ConnectionState.done) {
         if (snapshot.hasData) {
           String username = snapshot.data!.getString('username')!;
+          String role = snapshot.data!.getString('role')!;
           return Scaffold(
             extendBodyBehindAppBar: true,
             backgroundColor: Theme.of(context).primaryColor,
@@ -82,9 +83,9 @@ class _DashboardPageState extends State<DashboardPage> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const Text(
-                          'Peternak',
-                          style: TextStyle(
+                        Text(
+                          role,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 32,
 

@@ -5,9 +5,10 @@ import 'package:intl/intl.dart';
 import '../validator/input_validator.dart';
 
 class DatePicker extends StatefulWidget {
-  const DatePicker({super.key, required this.callback});
+  const DatePicker({super.key, required this.callback, this.initDate = ''});
 
   final Function(String) callback;
+  final String initDate;
 
 
   @override
@@ -17,6 +18,12 @@ class DatePicker extends StatefulWidget {
 class _DatePickerState extends State<DatePicker> {
 
   final controller = TextEditingController();
+
+  @override
+  void initState() {
+    controller.text = widget.initDate;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

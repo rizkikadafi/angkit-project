@@ -22,9 +22,9 @@ class RegisterController {
   }
 
   Future<bool> register() async {
+    Map data = {"username": username.text};
     Uri uri = Uri.parse("http://angkit.ktsabit.com/checkUser");
 
-    Map data = {"username": username.text};
 
     var result = await http.post(uri,
         headers: <String, String>{
@@ -44,7 +44,6 @@ class RegisterController {
   }
 
   Future<bool> registRole() async {
-
     if (role != "") {
       Uri uri = Uri.parse("http://angkit.ktsabit.com/register");
 

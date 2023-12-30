@@ -21,10 +21,19 @@ class _DataPageState extends State<DataPage> {
   Future<Batches?> getBatches() async {
     prefs = await SharedPreferences.getInstance();
     String id = prefs.getString('id')!;
-    Uri uri = Uri.parse('http://angkit.ktsabit.com/get_batches_by_farm');
-    Map body = {
-      "farm_id": id,
-    };
+    String role = prefs.getString('role')!;
+    String endpoint;
+    Map body = {};
+    if (role == 'Peternakan') {
+      endpoint = 'get_batches_by_farm';
+      body["farm_id"] = id;
+    } else {
+      endpoint = 'get_batches_by_dist';
+      body["distributor_id"] = id;
+
+    }
+    Uri uri = Uri.parse('http://angkit.ktsabit.com/$endpoint');
+
     Map<String, String> headers = {"Content-Type": "application/json"};
     final res = await http.post(uri, body: jsonEncode(body), headers: headers);
     if (res.statusCode == 200) {
@@ -108,7 +117,8 @@ class BatchCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (ctx) => DetailPage(batch: batch)));
+              // .push(MaterialPageRoute(builder: (ctx) => DetailPage(batch: batch)));
+              .push(MaterialPageRoute(builder: (ctx) => BatchData(batch: batch)));
         },
         child: Card(
           clipBehavior: Clip.antiAlias,

@@ -8,6 +8,32 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BatchInputController {
+
+  static Future<String> distributorAddBatch (String batch) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String id = prefs.getString("id")!;
+    Uri uri = Uri.parse('http://angkit.ktsabit.com/updateBatch');
+    Map data = {
+      "distributor": id,
+      "id": batch,
+    };
+
+    Map<String,String> headers = {
+      'Content-Type': 'application/json'
+    };
+
+    final result = await http.put(uri, body: jsonEncode(data), headers: headers);
+    // print(result.body);
+    final jsonRes = jsonDecode(result.body);
+
+    if (jsonRes['status'] == 'error') {
+      return jsonRes['message'];
+    }
+
+    return 'Success add batch';
+
+  }
+
   static Future<void> sendData(
     File file,
     BuildContext ctx,
@@ -18,7 +44,6 @@ class BatchInputController {
   ) async {
     Uri addBatchUri = Uri.parse('http://angkit.ktsabit.com/inputBatch');
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String username = prefs.getString("username")!;
     String id = prefs.getString("id")!;
 
     debugPrint(id);
